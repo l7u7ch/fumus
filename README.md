@@ -16,11 +16,23 @@
 - 実行には JDK と Scala CLI が必要です
 - 必ずバックアップを取ってから実行してください
 
-1. .env ファイルを編集する
-2. 以下のコマンドを実行する
+1. リポジトリをクローンする
 
 ```bash
 $ git clone https://github.com/l7u7ch/fumus
 $ cd fumus
+```
+
+2. .env ファイルを編集する
+
+```
+SERVICE=https://bsky.social/
+IDENTIFIER=<USER_IDENTIFIER>
+PASSWORD=<USER_PASSWORD>
+```
+
+3. Scala CLI を用いて実行する
+
+```bash
 $ scala-cli .
 ```
