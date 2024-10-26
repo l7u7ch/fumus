@@ -2,17 +2,26 @@
 
 //> using dep "com.lihaoyi::upickle:4.0.2"
 //> using dep "it.sauronsoftware.cron4j:cron4j:2.2.5"
+//> using dep com.outr::scribe:3.15.2
 //> using dep com.softwaremill.sttp.client4::core:4.0.0-M6
 
 import it.sauronsoftware.cron4j.Scheduler
 import java.time.format.DateTimeFormatter.ISO_INSTANT
 import java.time.ZonedDateTime
+import scribe.Logger
 import upickle.default.{ReadWriter, read}
 
 @main def Main() = {
   val SERVICE = sys.env.getOrElse("SERVICE", "https://bsky.social/")
   val IDENTIFIER = sys.env.getOrElse("IDENTIFIER", "")
   val PASSWORD = sys.env.getOrElse("PASSWORD", "")
+
+  Logger.root
+    .clearHandlers()
+    .withHandler(formatter = scribe.format.Formatter.compact)
+    .replace()
+
+  scribe.info("Launch")
 
   val scheduler = new Scheduler()
 
@@ -38,6 +47,7 @@ import upickle.default.{ReadWriter, read}
       if (0 < rkeys.length) {
         rkeysPost.foreach(agent.deleteRecord)
         rkeysRepost.foreach(agent.deleteRepost)
+        scribe.info(s"Delete Records ${rkeys.length}")
       }
     }
   )
