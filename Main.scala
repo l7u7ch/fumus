@@ -15,7 +15,7 @@ import upickle.default.{ReadWriter, read}
   val scheduler = new Scheduler()
 
   scheduler.schedule(
-    "0 4 * * *",
+    "0 * * * *",
     () => {
 
       val agent: Agent = Agent(service = SERVICE)
