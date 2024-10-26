@@ -1,3 +1,5 @@
+//> using scala 3.3.4
+
 //> using dep "com.lihaoyi::upickle:4.0.2"
 //> using dep "it.sauronsoftware.cron4j:cron4j:2.2.5"
 //> using dep com.softwaremill.sttp.client4::core:4.0.0-M6
